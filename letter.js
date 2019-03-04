@@ -1,19 +1,21 @@
 //creating a constructor named letter
 function Letter(letter) {
+  //this letter
   this.letter = letter;
+  //check if letter exists
   this.guessed = false;
-  this.ifCorrect = function() {
-    if (guessed === true) {
+  //if it exists display it
+  this.ifCorrectShow = function() {
+    if (this.guessed === true) {
       return this.letter;
-    } else return "-";
+    } else return "- ";
   };
-  this.UpdateGuessed = function() {
-    for (i = 0; i < word.length; i++) {
-      if ((word[i].toUpperCase() = this.letter.toUpperCase())) {
-        this.guessed = true;
-      } else this.letter = false;
+  //check if it exists and updated guessed to true if it is correct
+  this.UpdateGuessed = function(input) {
+    if (input === this.letter) {
+      this.guessed = true;
     }
   };
 }
-
-module.exports=Letter;
+//export Letter constructor
+module.exports = Letter;
