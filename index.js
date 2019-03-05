@@ -16,16 +16,18 @@ function startGame() {
   //guesses allowed before the player loses
   GuessesLeft = 5;
   //call a new game based on the random word picked
-  // this function takes two values, the first one is the random word picked, the second one is the new word object created
+  // this function takes two arguments, the first one is the random word OBJECT picked, the second one is the new word object created
   GuessingWord(word, RandWord);
 }
 
 // define the GuessingWord function which is the actual game for the picked word
-function GuessingWord(input) {
+function GuessingWord(word, RandWord) {
   var lettersArr = [];
-  var guessesArr = [];
+  //created an array to push the correct letters to it , so we can tell when the game is won
+
+  var correctLettersArr = [];
   //starts by showing dashed of the word first, by calling string function from required word constructor
-  console.log(input.string());
+  console.log(word.string());
   //now we need to start interaction with the user/player so we start prompt
   inquire
     .prompt([
@@ -35,28 +37,32 @@ function GuessingWord(input) {
       }
     ])
     .then(function(answer) {
-      input.charCheck(answer.letter.toLowerCase());
-      input.arr.forEach(function(target) {
-        lettersArr.push(target.letter);
-        guessesArr.push(target.guessed);
+      //just grabbing the prompt answer changing it to lower case so we can compare it in the next step,checking if is true or false and pushing it to the lettters array
+      word.charCheck(answer.letter.toLowerCase());
+      word.arr.forEach(function(e) {
+        lettersArr.push(e.letter);
       });
       if (lettersArr.indexOf(answer.letter.toLowerCase()) > -1) {
         console.log("Correct Guess!");
+        correctLettersArr.push(answer.letter.toLowerCase());
+
+        console.log(RandWord.split(""));
+        if ((correctLettersArr = RandWord.split(""))) {
+          console.log("great job you Guessed the word!");
+        }
       } else {
         GuessesLeft--;
         console.log("sorry wrong guess");
         console.log("you have " + GuessesLeft + " Left");
       }
-      //here we need a function to check number of gueses left to see if the user can input another guess again or game over
+      //here we need a function to check number of gueses left to see if the user can word another guess again or game over
       if (GuessesLeft > 0) {
-        GuessingWord(input);
+        GuessingWord(word, RandWord);
       }
       //if you are out of guesses and still didnt guess it game over and show the word
       else {
         if (GuessesLeft === 0) {
           console.log("sorry you lost");
-        } else {
-          console.log("great job!");
         }
       }
     });
