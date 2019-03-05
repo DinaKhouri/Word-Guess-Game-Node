@@ -47,6 +47,18 @@ function GuessingWord(input) {
         console.log("sorry wrong guess");
         console.log("you have " + GuessesLeft + " Left");
       }
+      //here we need a function to check number of gueses left to see if the user can input another guess again or game over
+      if (GuessesLeft > 0) {
+        GuessingWord(input);
+      }
+      //if you are out of guesses and still didnt guess it game over and show the word
+      else {
+        if (GuessesLeft === 0) {
+          console.log("sorry you lost");
+        } else {
+          console.log("great job!");
+        }
+      }
     });
 }
 
