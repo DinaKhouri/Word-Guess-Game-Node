@@ -1,5 +1,5 @@
 //require the letter constructor
-var Letter = require("letter.js");
+var Letter = require("./letter.js");
 //word constructor to create a constructor object for each of the word letters
 function Word(word) {
   //create array of random word (works for single words no spaces)
