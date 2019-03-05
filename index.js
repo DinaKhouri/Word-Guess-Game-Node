@@ -4,10 +4,11 @@ var Word = require("./word.js");
 // use enquirer
 var inquire = require("inquirer");
 // create an array of words to be guessed
-var WordsArray = ["help", "play", "music", "instrument", "dog", "game", "test"];
+var WordsArray = ["help", "play", "music", "cat", "dog", "game", "world"];
 //define guesses left
 var GuessesLeft;
-
+//created an array to push the correct letters to it , so we can tell when the game is won
+var correctLettersArr;
 // new game function
 function startGame() {
   var RandWord = WordsArray[Math.floor(Math.random() * WordsArray.length)];
@@ -15,6 +16,8 @@ function startGame() {
   var word = new Word(RandWord);
   //guesses allowed before the player loses
   GuessesLeft = 5;
+  //counter for correct letters to check when the user wins
+  correctLettersArr = 0;
   //call a new game based on the random word picked
   // this function takes two arguments, the first one is the random word OBJECT picked, the second one is the new word object created
   GuessingWord(word, RandWord);
@@ -23,9 +26,7 @@ function startGame() {
 // define the GuessingWord function which is the actual game for the picked word
 function GuessingWord(word, RandWord) {
   var lettersArr = [];
-  //created an array to push the correct letters to it , so we can tell when the game is won
 
-  var correctLettersArr = [];
   //starts by showing dashed of the word first, by calling string function from required word constructor
   console.log(word.string());
   //now we need to start interaction with the user/player so we start prompt
@@ -44,11 +45,13 @@ function GuessingWord(word, RandWord) {
       });
       if (lettersArr.indexOf(answer.letter.toLowerCase()) > -1) {
         console.log("Correct Guess!");
-        correctLettersArr.push(answer.letter.toLowerCase());
-
-        console.log(RandWord.split(""));
-        if ((correctLettersArr = RandWord.split(""))) {
-          console.log("great job you Guessed the word!");
+        correctLettersArr++;
+        console.log(correctLettersArr);
+        console.log(RandWord.length);
+        if (correctLettersArr === RandWord.length) {
+          console.log(
+            "great job you Guessed the word, it is " + RandWord + "!"
+          );
         }
       } else {
         GuessesLeft--;
@@ -62,7 +65,7 @@ function GuessingWord(word, RandWord) {
       //if you are out of guesses and still didnt guess it game over and show the word
       else {
         if (GuessesLeft === 0) {
-          console.log("sorry you lost");
+          console.log("sorry you lost,the word was " + RandWord + ".");
         }
       }
     });
