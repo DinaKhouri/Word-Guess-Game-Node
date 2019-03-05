@@ -23,7 +23,7 @@ function startGame() {
 // define the GuessingWord function which is the actual game for the picked word
 function GuessingWord(input) {
   //starts by showing dashed of the word first, by calling string function from required word constructor
-  console.log(input.string());
+  //console.log(input.string());
   //now we need to start interaction with the user/player so we start prompt
   inquire
     .prompt([

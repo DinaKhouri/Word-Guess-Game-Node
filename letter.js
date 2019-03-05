@@ -1,5 +1,5 @@
 //creating a constructor named letter
-function Letter(letter) {
+Letter = function(letter) {
   //this letter
   this.letter = letter;
   //check if letter exists
@@ -16,6 +16,6 @@ function Letter(letter) {
       this.guessed = true;
     }
   };
-}
+};
 //export Letter constructor
 module.exports = Letter;
