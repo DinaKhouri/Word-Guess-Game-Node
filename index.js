@@ -22,8 +22,10 @@ function startGame() {
 
 // define the GuessingWord function which is the actual game for the picked word
 function GuessingWord(input) {
+  var lettersArr = [];
+  var guessesArr = [];
   //starts by showing dashed of the word first, by calling string function from required word constructor
-  //console.log(input.string());
+  console.log(input.string());
   //now we need to start interaction with the user/player so we start prompt
   inquire
     .prompt([
@@ -33,13 +35,17 @@ function GuessingWord(input) {
       }
     ])
     .then(function(answer) {
-      var inputletter = input.charCheck(answer.letter.toLowerCase());
-      for (i = 0; i < this.arr.length; i++) {
-        if ((this.arr[0] = inputletter)) {
-          console.log("Correct Guess!");
-        } else "Sorry it;s a wrong Guess";
+      input.charCheck(answer.letter.toLowerCase());
+      input.arr.forEach(function(target) {
+        lettersArr.push(target.letter);
+        guessesArr.push(target.guessed);
+      });
+      if (lettersArr.indexOf(answer.letter.toLowerCase()) > -1) {
+        console.log("Correct Guess!");
+      } else {
         GuessesLeft--;
-        console.log("you have " + GuessesLeft + " guesses left");
+        console.log("sorry wrong guess");
+        console.log("you have " + GuessesLeft + " Left");
       }
     });
 }
