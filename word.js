@@ -17,9 +17,9 @@ function Word(word) {
     return string;
   };
   //this function will run to check if the input guessed letter is already in the word array, if it is there it will change guessed to true , this will be used in the ifCorrectShow to show either lettrs or dashes
-  this.charCheck = function(input) {
+  this.charCheck = function(GuessedLetter) {
     this.arr.forEach(function(e) {
-      e.UpdateGuessed(input);
+      e.UpdateGuessed(GuessedLetter);
     });
   };
 }

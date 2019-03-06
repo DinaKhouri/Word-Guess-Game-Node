@@ -52,29 +52,14 @@ function GuessingWord(word, RandWord) {
           console.log(
             "great job you Guessed the word, it is " + RandWord + "!"
           );
-          //now we need to end the game and check if the user wants to play again
-          inquire
-            .prompt([
-              {
-                type: "confirm",
-                name: "play",
-                message: "do you want to play again?"
-              }
-            ])
-            .then(function(answer) {
-              if (answer.play) {
-                startGame();
-              } else {
-                process.exit();
-              }
-            });
-        } else {
-          GuessesLeft--;
-          console.log("sorry wrong guess");
-          console.log("you have " + GuessesLeft + " Left");
+          process.exit();
         }
+        //now we need to end the game and check if the user wants to play
+      } else {
+        GuessesLeft--;
+        console.log("sorry wrong guess");
+        console.log("you have " + GuessesLeft + " Left");
       }
-
       //here we need a function to check number of gueses left to see if the user can word another guess again or game over
       if (GuessesLeft > 0) {
         GuessingWord(word, RandWord);
@@ -83,22 +68,7 @@ function GuessingWord(word, RandWord) {
       else {
         if (GuessesLeft === 0) {
           console.log("sorry you lost,the word was " + RandWord + ".");
-          //now we need to end the game and check if the user wants to play again
-          inquire
-            .prompt([
-              {
-                type: "confirm",
-                name: "play",
-                message: "do you want to play again?"
-              }
-            ])
-            .then(function(answer) {
-              if (answer.play) {
-                startGame();
-              } else {
-                process.exit();
-              }
-            });
+          process.exit();
         }
       }
     });
